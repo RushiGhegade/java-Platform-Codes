@@ -33,8 +33,45 @@ class Demo{
 	
 
 	static int findelement(int arr[]){
+
+		int maxl=Integer.MIN_VALUE;
+        int minr=Integer.MAX_VALUE;
+        
+        int lmax[]=new int[arr.length];
+        int rmax[]=new int[arr.length];
+        
+        
+        
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]>maxl){
+                lmax[i]=arr[i];
+                maxl=arr[i];
+            }else{
+                lmax[i]=lmax[i-1];
+            }
+        }
+        
+        for(int i=arr.length-1;i>=0;i--){
+            
+            if(arr[i]<minr){
+                rmax[i]=arr[i];
+                minr=arr[i];
+            }else{
+                rmax[i]=rmax[i+1];
+            }
+        }
+        
+        for(int i=1;i<arr.length-1;i++){
+            
+            if(lmax[i]==rmax[i]){
+                return lmax[i];
+            }
+        }
+        
+        return -1;
+
 		
-		for(int i=1;i<arr.length-1;i++){
+	/*for(int i=1;i<arr.length-1;i++){
 
 
 			boolean Right=true;
@@ -62,6 +99,7 @@ class Demo{
 			}
 		}
 		return -1;
+		*/
 
 	}
 
