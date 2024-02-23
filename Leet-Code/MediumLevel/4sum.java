@@ -25,114 +25,118 @@ Constraints:
 import java.util.*;
 class FourSum{
 
-	//Find TwoSum
-	List<List<Integer>> TwoSum(int arr[],int target,int start){
+        //Find TwoSum
+        List<List<Integer>> TwoSum(int arr[],long target,int start){
 
-		List<List<Integer>> res=new ArrayList<>();
+                List<List<Integer>> res=new ArrayList<>();
 
-		if(arr.length-start<2){
-			return res;
-		}
+                if(arr.length-start<2){
+                        return res;
+                }
 
-		int i=start;
-		int j=arr.length-1;
+                int i=start;
+                int j=arr.length-1;
 
-		while(i<j){
-			if(i!=start  && arr[i]==arr[i-1]){
-				i++;
-				continue;
-				
-			}
-			int sum=arr[i]+arr[j];
+                while(i<j){
+                        if(i!=start  && arr[i]==arr[i-1]){
+                                i++;
+                                continue;
 
-			if(sum==target){
-				List<Integer> tsum=new ArrayList<>();
-				tsum.add(arr[i]);
-				tsum.add(arr[j]);
-				res.add(tsum);
-				i++;
-				j--;
-			}else if(sum>target){
-				j--;
-			}else{
-				i++;
-			}
-		}
+                        }
+                        long sum=arr[i]+arr[j];
 
-		return res;
+                        if(sum==target){
+                                List<Integer> tsum=new ArrayList<>();
+                                tsum.add(arr[i]);
+                                tsum.add(arr[j]);
+                                res.add(tsum);
+                                i++;
+                                j--;
+                        }else if(sum>target){
+                                j--;
+                        }else{
+                                i++;
+                        }
+                }
 
-	}		
-	// Find TSum For Target 
-	List<List<Integer>> TSum(int arr[],int target,int start){
+                return res;
 
-		List<List<Integer>> res=new ArrayList<>();
+        }
+        // Find TSum For Target
+        List<List<Integer>> TSum(int arr[],int target,int start){
 
-		if(arr.length-start<3){
-			return res;
-		}
+                List<List<Integer>> res=new ArrayList<>();
 
-		for(int i=start;i<=arr.length-3;i++){
-			if(i!=start  && arr[i]==arr[i-1]){
+                if(arr.length-start<3){
+                        return res;
+                }
+
+                for(int i=start;i<=arr.length-3;i++){
+                        if(i!=start  && arr[i]==arr[i-1]){
                                 continue;
                         }
-			int val=arr[i];
+                        long val=arr[i];
+                        //System.out.println("Value : "+val);
+                        long tar=target-val;
+                        System.out.println("Two Sum Target"+tar);
 
-			int tar=target-val;
+                        List<List<Integer>>  TSum = TwoSum(arr,tar,i+1);
 
-			List<List<Integer>>  TSum = TwoSum(arr,tar,i+1);
+                        for(List<Integer> list : TSum){
 
-			for(List<Integer> list : TSum){
-				
-				list.add(val);
+                                list.add((int)val);
 
-				res.add(list);
-			}
-		}
+                                res.add(list);
+                        }
+                }
 
-
-		return res;
-		
-	}
-
-	// Find Four Sum For target
-	List<List<Integer>> fSum(int arr[],int target){	
-
-		List<List<Integer>> res=new ArrayList<>();
-
-		if(arr.length<4){
-			return res;
-		}
+                System.out.println("Tree Sum Arrray :"+res);
 
 
-		for(int i=0;i<=arr.length-4;i++){
-			if(i!=0  && arr[i]==arr[i-1]){
+                return res;
+
+        }
+
+        // Find Four Sum For target
+        List<List<Integer>> fSum(int arr[],int target){
+
+                List<List<Integer>> res=new ArrayList<>();
+
+                if(arr.length<4){
+                        return res;
+                }
+
+
+                for(int i=0;i<=arr.length-4;i++){
+                        if(i!=0  && arr[i]==arr[i-1]){
                                 continue;
                         }
-			int val=arr[i];
+                        int val=arr[i];
 
-			int tar=target-val;
+                        int tar=target-val;
+                        System.out.println("Three Sum tar"+tar);
 
-			List<List<Integer>> Tsum=TSum(arr,tar,i+1);
+                        List<List<Integer>> Tsum=TSum(arr,tar,i+1);
 
-			for(List<Integer> list : Tsum){
-				
-				list.add(val);
-				res.add(list);
-			}
-		}
+                        for(List<Integer> list : Tsum){
 
-		return res;		
-	}
+                                list.add(val);
+                                res.add(list);
+                        }
+                }
 
-	public static void main(String args[]) {
-			
-		int arr[]=new int[]{1000000000,1000000000,1000000000,1000000000};
-		int target=0;
-		Arrays.sort(arr);
-			
-		FourSum obj=new FourSum();
-		List<List<Integer>> Fsum= obj.fSum(arr,target);
+                return res;
+        }
 
-		System.out.println(Fsum);
-	}
+        public static void main(String args[]) {
+
+                int arr[]=new int[]{1000000000,1000000000,1000000000,1000000000};
+                int target=-294967296;
+                Arrays.sort(arr);
+
+                FourSum obj=new FourSum();
+                List<List<Integer>> Fsum= obj.fSum(arr,target);
+
+                System.out.println(Fsum);
+        }
 }
