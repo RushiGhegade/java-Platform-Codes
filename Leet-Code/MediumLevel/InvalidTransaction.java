@@ -45,6 +45,50 @@ between 1 and 10.
 ● Each {time} consist of digits, and represent an integer between 0 and 1000.
 ● Each {amount} consist of digits, and represent an integer between 0 and 2000.
 */
+// Easy Approch
+/*
+ public List<String> invalidTransactions(String[] transactions) {
+    int n=transactions.length;
+     List<String> result=new ArrayList<>();
+     String name[]=new String[n];
+     int time[]=new int[n];
+     int amount[]=new int[n];
+     String city[]=new String[n]; 
+
+    boolean isvalid[]=new boolean[n];
+
+    for(int i=0;i<n;i++){
+        String arr[]=transactions[i].split(",");
+        name[i]=arr[0];
+        time[i]=Integer.parseInt(arr[1]);
+        amount[i]=Integer.parseInt(arr[2]);
+        city[i]=arr[3];
+    }
+
+
+    for(int i=0;i<n;i++){
+
+        if(amount[i] > 1000){
+            isvalid[i]=true;
+        }
+
+        for(int j=i+1;j<n;j++){
+
+            if(name[i].equals(name[j]) && !city[i].equals(city[j]) && Math.abs(time[i]-time[j])<=60 ){
+                isvalid[i]=true;
+                isvalid[j]=true;
+            }
+        }
+
+    }
+
+    for(int i=0;i<n;i++){
+        if(isvalid[i]){
+            result.add(transactions[i]);
+        }
+    }
+    return result;
+*/
 import java.util.*;
 class Demo{
 
