@@ -1,0 +1,105 @@
+//{ Driver Code Starts
+import java.util.Scanner;
+import java.util.Stack;
+class SortedStack{
+	public static void main(String[] args){
+		Scanner sc=new Scanner(System.in);
+		int t=sc.nextInt();
+		while(t-->0){
+			Stack<Integer> s=new Stack<>();
+			int n=sc.nextInt();
+			while(n-->0)
+			s.push(sc.nextInt());
+			GfG g=new GfG();
+			Stack<Integer> a=g.sort(s);
+			while(!a.empty()){
+				System.out.print(a.peek()+" ");
+				a.pop();
+			}
+			System.out.println();
+		}
+	}
+}
+// } Driver Code Ends
+
+
+
+/*Complete the function below*/
+
+class GfG{
+    
+    
+    void sort(Stack s,int num){
+        if(s.empty() || (int)s.peek()<num){
+            s.push(num);
+            return ;
+        }
+        
+        int ele=(int)s.pop();
+        
+        sort(s,num);
+        
+        s.push(ele);
+        
+    }
+    
+    void split(Stack s){
+        
+        if(s.empty()){
+            return;
+        }
+        
+        int top=(int)s.pop();
+        
+        split(s);
+        
+        sort(s,top);
+    }
+    
+	public Stack<Integer> sort(Stack<Integer> s)
+	{
+		//add code here.
+		
+		// Optimize approch
+		split(s);
+		
+		return s;
+		
+		
+		
+		
+		/*
+		// brute force approch
+		int arr[]=new int[s.size()];
+		
+		
+		int k=0;
+		while(!s.empty()){
+		   arr[k]=(int)s.pop();
+		   k++;
+		}
+		
+		for(int i=0;i<arr.length;i++){
+		    boolean flag=true;
+		    for(int j=0;j<arr.length-i-1;j++){
+		        if(arr[j]>arr[j+1]){
+		            flag=false;
+		            int temp=arr[j];
+		            arr[j]=arr[j+1];
+		            arr[j+1]=temp;
+		        }
+		    }
+		    if(flag==true){
+		        break;
+		    }
+		}
+		
+		for(int i=0;i<arr.length;i++) {
+		    s.push(arr[i]);
+		}
+		
+		return s;
+		*/
+		
+	}
+}
